@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Pages Office - 为 Windows 而生的轻量办公启动器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Roboto, Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2d3d;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05), 0 1px 4px rgba(0,0,0,0.02);
+            padding: 0 5%;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links a {
+            margin-left: 32px;
+            text-decoration: none;
+            color: #2c3e50;
+            font-size: 16px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+
+        .download-btn-nav {
+            background: #3b82f6;
+            color: white !important;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px 100px;
+            background: linear-gradient(135deg, #eef2ff 0%, #dbeafe 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+        }
+
+        .hero-badge {
+            background: rgba(59, 130, 246, 0.15);
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 60px;
+            color: #1d4ed8;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h0 {
+            font-size: 4.2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(145deg, #1e3a8a, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(145deg, #1e3a8a, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .hero-sub {
+            font-size: 1.3rem;
+            color: #4b5563;
+            max-width: 750px;
+            margin: 0 auto 30px;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 16px 42px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(59,130,246,0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(59,130,246,0.4);
+        }
+
+        .btn-primary .size-badge-inline {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .section {
+            max-width: 1280px;
+            margin: 80px auto;
+            padding: 0 24px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: #5a6e7c;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #e5e7eb;
+            transition: all 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #bfdbfe;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #5a6e7c;
+            line-height: 1.5;
+        }
+
+        .footer {
+            background: #111827;
+            color: #cbdcd3;
+            padding: 50px 24px 30px;
+            text-align: center;
+            margin-top: 80px;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        .kernel-note {
+            font-size: 0.75rem;
+            color: #8aa39a;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 760px) {
+            .hero h1 { font-size: 2.3rem; }
+            .navbar { padding: 0 20px; }
+            .nav-links a { margin-left: 16px; font-size: 14px; }
+            .btn-primary { padding: 12px 24px; font-size: 1rem; }
+            .btn-primary .size-badge-inline { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo-area">
+        Pages Office
+    </div>
+    <div class="nav-links">
+        <a href="#">首页</a>
+        <a href="#features">特性</a>
+        <a href="https://wwauu.lanzouq.com/iudcg3squdfg" class="download-btn-nav" target="_blank">立即下载</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <div>
+        <h0>Pages Office</h0>
+        <div class="hero-badge">v2.1.3</div>
+        <h1>比传统办公更轻，比想象中更快</h1>
+        <div class="hero-sub">轻量级办公启动环境 · 自动检测依赖 · 一键即装即用</div>
+
+        <div class="cta-group">
+            <a href="https://wwauu.lanzouq.com/iudcg3squdfg" class="btn-primary" target="_blank">
+                立即下载
+                <span class="size-badge-inline">94.1 MB · 提取码1234</span>
+            </a>
+        </div>
+        <p style="margin-top: 28px; font-size: 14px; color: #4b5563;">无广告 · 无捆绑 · 无残留 · 纯粹的文件管理器与启动器</p>
+        <div class="kernel-note">完全支持 Windows 10 / 11 · 自动检测并静默安装 WebView2 依赖</div>
+    </div>
+</header>
+
+<div class="section" id="features">
+    <div class="section-title">专为极速与纯粹而生</div>
+    <div class="section-desc">别人用 2GB （安装后）实现的办公环境，我用 125MB（安装后） 重新定义</div>
+    <div class="grid-3">
+        <div class="card">
+            <div class="card-icon">⚡</div>
+            <h3>秒级启动</h3>
+            <p>基于 CMD 原生批处理与 PYQT 6，HTML构建的轻量启动器，无感知唤醒，拒绝任何多余加载。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">💾</div>
+            <h3>96.3 MB 轻装出击</h3>
+            <p>整个离线安装包仅 96.3MB，在最小的空间里装下完整的运行环境与办公核心。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🛡️</div>
+            <h3>全自动依赖诊疗</h3>
+            <p>内置 Microsoft Edge WebView2 静默安装包。无需任何手动配置，缺乏环境时自动补齐。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📊</div>
+            <h3>高效 3 in 1</h3>
+            <p>三合一启动器，点哪个开哪个，不拖沓，快速。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🖥️</div>
+            <h3>兼容性好</h3>
+            <p>完美兼容 Windows 10 / 11，覆盖 98% 的 Windows 电脑。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🍃</div>
+            <h3>纯净无打扰</h3>
+            <p>无弹窗、无后台常驻进程、无遥测数据收集。关掉即走，程序只办程序的事。</p>
+        </div>
+    </div>
+</div>
+
+<p style="text-align:center; font-size: 0.8rem; color: #9ca3af;">*安装包体积基于 PyInstaller 原生打包，包含所有依赖环境。</p>
+
+<div class="section" style="background: #eff6ff; border-radius: 40px; padding: 40px 24px;">
+    <div style="text-align: center; max-width: 780px; margin: 0 auto;">
+        <div style="font-size: 2.5rem;">📦</div>
+        <p>Pages Office 将“极简主义、精准依赖控制、标准化安装流程”做到极致，让每一次安装都干脆利落，让每一兆空间都花在刀刃上。</p>
+        <p style="margin-top: 16px;"><strong>没有全家桶套餐，没有垃圾残留，只有干净、纯粹的办公启动环境。</strong></p>
+    </div>
+</div>
+
+<div class="footer">
+    <div style="max-width: 900px; margin: 0 auto;">
+        <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 8px;">📄 Pages Office</div>
+        <p style="margin-bottom: 20px;">© 2026 爱玩批处理的cmd 保留所有权利。<br>基于 PyQt6 与 Windows 原生 API 构建 · 致敬独立开发精神。</p>
+        <p style="font-size: 0.8rem;">本软件为自制免费软件，无病毒无广告，不收集任何用户数据。部分地区杀毒软件可能误报，请放心添加信任。</p>
+        <p style="margin-top: 24px;">
+            <a href="https://space.bilibili.com/3546962242570935">关于我</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#">使用说明</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://14-y2014.github.io/my-download-site">个人网站</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="https://space.bilibili.com/3546962242570935">B站 @爱玩批处理的cmd</a>
+        </p>
+        <p style="margin-top: 24px; font-size: 0.7rem;">“别人问我为什么这么小，我说因为没用那一亿行广告的代码。”</p>
+    </div>
+</div>
+
+</body>
+</html>
